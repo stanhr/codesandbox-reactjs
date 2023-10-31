@@ -1,4 +1,4 @@
-import { useState } from "react"; // from imported from react library
+import { useState, useEffect } from "react"; // imported from react library
 import "./styles.css";
 
 export default function App() {
@@ -14,14 +14,24 @@ export default function App() {
     setCounter((c) => c + 1);
 
   }
+  
+  useEffect(function(){
+    getAdvice();
+  }, []);
+
 
   return (
     <div>
       <h1>{advice}</h1>
-      <p>You have read <strong>{counter}</strong> pieces of advice</p>
+      <Message counter={counter} />
       <button onClick={getAdvice}>Get advice</button>
     </div>
   );
 }
 
-// comment
+
+function Message (props) {
+  return (
+    <p>You have read <strong>{props.counter}</strong> pieces of advice</p>
+  );
+}
